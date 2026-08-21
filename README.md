@@ -3,30 +3,23 @@
 
 Os presentamos nuestro proyecto de videojuego desarrollado para la asignatura de Videojuegos I de la Universidad de Alicante
 
-Este juego ha sido desarrollado para jugarse en **GameBoy**, en el que encarnarás la piel de una abeja que quiere defender su hermoso jardín de una invasión de insectos con ganas de comer flores
+Este juego ha sido desarrollado para jugarse en **GameBoy** en lenguaje Assemblyx86 .z80. Se trata de un juego de oleadas frenético en el que encarnarás la piel de una abeja que quiere defender su hermoso jardín de una invasión de insectos con ganas de comer flores. El juego cuenta con varios tipos de enemigos con diferentes comportamientos, un sistema de spawneo tanto de los enemigos como de las flores aleatorio y un sistema de puntuación final.
 
-Serás capaz de mantener a ralla esta oleada y salvar las flores del jardín?
+Technical & Design Overview
+El primero de los objetivos era crear un juego teniendo en cuenta las restricciones de la GameBoy, pero sin que eso afectara a la jugabilidad del mismo. Como programador, fui el responsable de la creación de un sistema ECS desde cero específicamente diseñado para este lenguaje. Las características de este sistema es que es completamente escalable y super optimizado, permitiendo tener cientos de entidades simultaneamente sin afectar a la performance del juego. También creé un sistema de animaciones optimizado para mejorar visualmente el juego sin que se viera afectado y colaboré en la creación de un sistema de colisiones completo super optimizado y en el diseño y creación de la IA de los enemigos.
 
-Los desarrolladores de este proyecto han sido los siguientes:
-- Javier Herrero Ponce
-- Juan Bautista Hurtado Salazar
-- Octavio Vicent Lloret
+Key Systems & My Contributions
+Nuestro juego sigue una arquitectura ECS (Entity Component System). In this data-driven structure, entities are collections of data, components store that data, and systems process it. Las partes más destacadas de este sistema son las siguientes:
 
-**Tecnologías utilizadas**:
-- Programacion y desarrollo visual
-    - Visual Studio Code
-    - [GBTelera](https://github.com/lronaldo/gbtelera), proporcionada por el profesor de la asignatura, que contiene tanto emuladores para probar los juegos como elementos de diseño gráfico como GBTD
-    - [GBT Player](https://github.com/AntonioND/gbt-player) como player para la música
-    - Software libre OpenMPT para componer la música
+Sistema ECS
+    Scalability: este sistema permite la adición de nuevos proyectiles, nuevos tipos de enemigos o nuevos tipos de flores debido al uso de flags para el control de la creación de las entidades. Mediante estas flags, se                     utilizan plantillas de enemigos preescritas y se les da valores aleatorios para colocarlos en el mapa, de manera que no hay que modificar la estructura del sistema.
+    Optimización: mediante la gestión de los tiempos de dibujado de la GameBoy, se cuenta la cantidad de entidades que hay en el mapa y a partir de esa cantidad se añade un controlador que aumenta o disminuye la cantidad de veces que se dibuja por pantalla, haciendo que la tasa de FPS sea estable sin afectar al renderizado del juego. Todo esto sumado a la gestión conjunta de todas las entidades hace que la optimización del sistema sea una de las cosas mas destacables del proyecto.
 
-- Comunicación y organización de equipo
-    - Github
-    - Discord
-    - Drive   
+Sistema de animaciones
 
-### Como jugar
-1. En nuestra página de itch.io encontrarás el descargable .gb. Descargalo, ya que eso contiene el juego.
-2. Para poder ejecutarlo sin disponer de una Game Boy, se pueden usar diferentes emuladores, dependiendo del sistema operativo. La mejor opción tanto para Windows como para Linux es el emulador BGB, que es el que hemos estado usando para el desarrollo del juego
-3. Con el emulador y el juego descargados, solo queda ejecutar el emulador, abrir el juego y listo, a salvar el jardín de ha dicho!!
+Sistema de IA
+
+Additional Technical Features
+
 
 Licensed under the MIT license.
